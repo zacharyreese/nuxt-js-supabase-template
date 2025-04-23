@@ -9,7 +9,7 @@
     </header>
 </template>
 
-<style>
+<style scoped>
 .iconify {
 	font-size: var(--text-2xl) /* 1.5rem = 24px */;
   line-height: var(--tw-leading, var(--text-2xl--line-height) /* calc(2 / 1.5) ≈ 1.3333 */);
