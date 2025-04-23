@@ -26,7 +26,7 @@ const selectedView = ref(timePeriods[0])
 const transactions = ref([])
 
 const { data } = await getAllTransactions()
-transactions.value = data
+transactions.value = data.value
 
 // watchEffect(() => {
 //   if (status.value === 'success' && txsData.value) {

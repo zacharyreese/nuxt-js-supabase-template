@@ -1,6 +1,6 @@
 export const getAllTransactions = async () => {
-  const {data, error, status, refresh} = await useFetch('/api/transactions/getTransactions')
-  console.log(data);
+  const data = await useFetch('/api/transactions/getTransactions')
+  //console.log(data);
   // if (data.error?.value) {
   //   throw createError({
   //     statusCode: 500,
