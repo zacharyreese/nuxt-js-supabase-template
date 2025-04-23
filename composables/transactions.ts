@@ -1,15 +1,33 @@
 export const getAllTransactions = async () => {
-  const data = await useFetch('/api/transactions/getTransactions')
-  //console.log(data);
-  // if (data.error?.value) {
-  //   throw createError({
-  //     statusCode: 500,
-  //     statusMessage: 'Internal Server Error',
-  //     data: {
-  //       message: data.error?.value?.message || 'Internal Server Error',
-  //     },
-  //   })
-  // }
+  const result = await useFetch('/api/transaction/getAllTransactions')
+  console.log(result.data)
+  
+  if (result.error?.value) {
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Internal Server Error',
+      data: {
+        message: result.error?.value?.message || 'Internal Server Error',
+      },
+    })
+  }
 
-  return data
+  return result.data
 }
+
+export const deleteTransaction = async (id: string) => {
+  const result = await useFetch('/api/transaction/getAllTransactions')
+  
+  if (result.error?.value) {
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Internal Server Error',
+      data: {
+        message: result.error?.value?.message || 'Internal Server Error',
+      },
+    })
+  }
+
+  return result.data
+}
+

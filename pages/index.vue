@@ -16,7 +16,10 @@
     </section>
 
     <section class="mb-10">
-        <Transaction v-for="transaction in transactions" :key="transaction.id" :transaction="transaction" />
+      <div v-for="(transactionsOnDay, date) in transactionsGroupedByDate" :key="date" class="mb-10">
+        <DailyTransactionSummary :date="date" :transaction="transactionsOnDay" />
+        <Transaction v-for="transaction in transactionsOnDay" :key="transaction.id" :transaction="transaction" />
+      </div>
     </section>
 </template>
 
@@ -25,26 +28,20 @@ const timePeriods = ['Yearly', 'Monthly', 'Weekly', 'Daily']
 const selectedView = ref(timePeriods[0])
 const transactions = ref([])
 
-const { data } = await getAllTransactions()
+const { data } = await useFetch('/api/transaction/getAllTransactions')
 transactions.value = data.value
 
-// watchEffect(() => {
-//   if (status.value === 'success' && txsData.value) {
-//     transactions.value = txsData.value
-//   }
-// })
-
-// const transactionsGroupedByDate = computed(() => {
-//   const grouped = {}
-//   for (const transaction of transactions.value) {
-//     const date = new Date(transaction.created_at).toISOString()
-//     if (!grouped[date]) {
-//       grouped[date] = []
-//     }
-//     grouped[date].push(transaction)
-//   }
-//   return grouped
-// })
+const transactionsGroupedByDate = computed(() => {
+  const grouped = {}
+  for (const transaction of transactions.value) {
+    const date = new Date(transaction.created_at).toISOString().split('T')[0]
+    if (!grouped[date]) {
+      grouped[date] = []
+    }
+    grouped[date].push(transaction)
+  }
+  return grouped
+})
 
 </script>
 
