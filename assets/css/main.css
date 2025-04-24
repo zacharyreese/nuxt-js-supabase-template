@@ -1,10 +1,29 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
+/* Global styles */
+body {
+  background-color: var(--color-brand-900);
+  font-family: 'Inter';
+  color: white;
+}
 
-
+/* Set the colors for the brand theme */
+/* https://www.tailwindshades.com/ */
 @theme static {
-  --color-brand-50: #f0f9ff;
+--color-brand-50: #faf5f8;
+--color-brand-100: #f7ecf1;
+--color-brand-200: #f0dae5;
+--color-brand-300: #e5bccf;
+--color-brand-400: #d393b0;
+--color-brand-500: #c37195;
+--color-brand-600: #ae5476;
+--color-brand-700: #94425f;
+--color-brand-800: #78374d;
+--color-brand-900: #683345;
+--color-brand-950: #3e1926;
+
+  /* --color-brand-50: #f0f9ff;
   --color-brand-100: #e0f2fe;
   --color-brand-200: #bae6fd;
   --color-brand-300: #7dd3fc;
@@ -14,10 +33,5 @@
   --color-brand-700: #0369a1;
   --color-brand-800: #075985;
   --color-brand-900: #0c4a6e;
-  --color-brand-950: #082f49;
-}
-
-body {
-  background-color: var(--color-brand-950);
-  font-family: 'Inter';
+  --color-brand-950: #082f49; */
 }
