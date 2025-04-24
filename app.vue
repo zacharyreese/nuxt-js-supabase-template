@@ -1,3 +1,8 @@
+<!--
+  App.vue is the main entry point for the app.
+  Do not change the <template /> code.
+  To start customizing the web page, start with /layouts/default.vue
+-->
 <template>
   <UApp>
     <NuxtLayout>
@@ -9,26 +14,8 @@
 <script setup>
 // Global scripts go here, eg: fonts, pixels, or other global variables
 
-// Add google fonts
-useHead({
-  link: [
-    {
-      rel: 'preconnect',
-      href: 'https://fonts.googleapis.com'
-    },
-    {
-      rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css2?family=Inter&display=swap',
-      crossorigin: ''
-    }
-  ]
-})
 </script>
 
 <style>
-/* Global styles can go here */
-/* Set the font family and styles for the entire site */
-body {
-  font-family: 'Inter';
-}
+/* Global styles can go here but should probably be in the main.css file */
 </style>
