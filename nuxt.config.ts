@@ -12,4 +12,8 @@ export default defineNuxtConfig({
   supabase: {
     redirect: false
   },
+  colorMode: {
+    preference: 'dark',
+    fallback: 'dark'
+  }
 })

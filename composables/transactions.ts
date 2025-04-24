@@ -1,6 +1,5 @@
 export const getAllTransactions = async () => {
   const result = await useFetch('/api/transaction/getAllTransactions')
-  console.log(result.data)
   
   if (result.error?.value) {
     throw createError({

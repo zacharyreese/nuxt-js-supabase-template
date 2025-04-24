@@ -1,2 +1,9 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
+
+/*
+  Global Theme Colors
+*/
+@theme {
+  --ui-bg: #0E172B; /* Main Background Color for the app and UI elements */
+}
