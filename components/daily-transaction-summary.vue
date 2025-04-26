@@ -8,7 +8,7 @@
       </div>
 
       <div class="flex items-center justify-end mr-10">
-        {{ currency }}
+        {{ formattedCurrency }}
       </div>
     </div>
 </template>
@@ -33,5 +33,7 @@ const total = computed(() => {
   return sum
 })
 
-const {currency} = formatCurrency(total.value)
+const formattedCurrency = computed(() => {
+  return formatCurrency(total.value).currency
+})
 </script>

@@ -35,11 +35,8 @@ const transactions = ref([])
 
 async function handleUpdate() {
   const data = await getAllTransactions()
-  transactions.value = data.value
+  transactions.value = data
 }
-
-// Initial load
-await handleUpdate()
 
 const transactionsGroupedByDate = computed(() => {
   const grouped = {}
@@ -52,6 +49,9 @@ const transactionsGroupedByDate = computed(() => {
   }
   return grouped
 })
+
+// Initial load
+await handleUpdate()
 </script>
 
 <style scoped>

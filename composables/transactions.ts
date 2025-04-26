@@ -1,19 +1,11 @@
 export const getAllTransactions = async () => {
-  const result = await useFetch('/api/transaction/getAllTransactions')
-  
-  if (result.error?.value) {
-    throw createError({
-      statusCode: 500,
-      statusMessage: 'Internal Server Error',
-      data: {
-        message: result.error?.value?.message || 'Internal Server Error',
-      },
-    })
+  try {
+    const result = await $fetch('/api/transaction/getAllTransactions')
+    return result
+  } catch (error) {
+    console.error(error)
   }
-
-  return result.data
 }
-
 
 export const deleteTransaction = async (transaction: Transaction) => {
   const db = useSupabaseClient<Database>()

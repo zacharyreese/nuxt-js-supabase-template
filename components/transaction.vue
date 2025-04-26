@@ -48,11 +48,11 @@ async function handleDelete() {
   isLoading.value = true
   try {
     await deleteTransaction(props.transaction)
+  } finally {
     emit('update')
     toast.add({
       title: 'Transaction deleted',
     })
-  } finally {
     isLoading.value = false
   }
 }
