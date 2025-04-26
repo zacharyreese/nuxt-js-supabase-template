@@ -4,7 +4,7 @@
             Finance Tracker
         </NuxtLink>
         <div>
-            <UAvatar src="https://github.com/shadcn.png" icon="stash:user-avatar" class="custom-avatar-icon" />
+            <UAvatar src="default_avatar.jpeg" icon="stash:user-avatar" class="custom-avatar-icon" />
         </div>
     </header>
 </template>

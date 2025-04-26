@@ -18,6 +18,9 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     'nuxt-security',
   ],
+  imports: {
+    dirs: ['types']
+  },
   css: ['~/assets/css/main.css'],
   supabase: {
     redirect: false
