@@ -23,15 +23,16 @@ body {
 --color-brand-900: #683345;
 --color-brand-950: #3e1926;
 
-  /* --color-brand-50: #f0f9ff;
-  --color-brand-100: #e0f2fe;
-  --color-brand-200: #bae6fd;
-  --color-brand-300: #7dd3fc;
-  --color-brand-400: #38bdf8;
-  --color-brand-500: #0ea5e9;
-  --color-brand-600: #0284c7;
-  --color-brand-700: #0369a1;
-  --color-brand-800: #075985;
-  --color-brand-900: #0c4a6e;
-  --color-brand-950: #082f49; */
+--color-eucalyptus-50: #f0f9f4;
+--color-eucalyptus-100: #dcefe3;
+--color-eucalyptus-200: #bbdfca;
+--color-eucalyptus-300: #8dc8ab;
+--color-eucalyptus-400: #5daa86;
+--color-eucalyptus-500: #3c8e6a;
+--color-eucalyptus-600: #2a7153;
+--color-eucalyptus-700: #225a44;
+--color-eucalyptus-800: #1d4837;
+--color-eucalyptus-900: #193b2e;
+--color-eucalyptus-950: #0d211a;
+
 }

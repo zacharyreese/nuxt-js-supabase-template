@@ -16,12 +16,14 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxtjs/supabase',
     '@nuxt/eslint',
+    'nuxt-security',
   ],
   css: ['~/assets/css/main.css'],
   supabase: {
     redirect: false
   },
-  ui: {
-    colorMode: false
+  colorMode: {
+    preference: 'dark',
+    fallback: 'dark',
   },
 })

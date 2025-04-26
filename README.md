@@ -42,6 +42,6 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 
 
 # Nuxt UI
-- Set colorMode: false in nuxt config, this will prevent components from chanign colors based on system theme
+- Set colorMode to dark or light in nuxt config
 - All UI colors us "brand" theme color. Set in main.css
 - For more themeing on Nuxt UI, see https://www.youtube.com/watch?v=_eQxomah-nA
