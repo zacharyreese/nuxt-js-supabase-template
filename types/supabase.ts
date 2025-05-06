@@ -43,6 +43,7 @@ export type Database = {
           description: string | null
           id: number
           is_deleted: boolean
+          transaction_date: string | null
           type: string | null
         }
         Insert: {
@@ -53,6 +54,7 @@ export type Database = {
           description?: string | null
           id?: number
           is_deleted?: boolean
+          transaction_date?: string | null
           type?: string | null
         }
         Update: {
@@ -63,6 +65,7 @@ export type Database = {
           description?: string | null
           id?: number
           is_deleted?: boolean
+          transaction_date?: string | null
           type?: string | null
         }
         Relationships: []

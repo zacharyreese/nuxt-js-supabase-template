@@ -4,7 +4,7 @@
       Summary
     </h1>
     <div>
-      <USelectMenu v-model="selectedView" :items="timePeriods" :search-input="false" highlight/>
+      <USelectMenu v-model="selectedView" :items="timePeriods" :search-input="false" highlight class="cursor-pointer"/>
     </div>
   </section>
 
@@ -13,6 +13,12 @@
     <Trend title="S&P 500" :amount="1000" :lastAmount="1250" :loading="false" />
     <Trend title="Crypto" :amount="1000" :lastAmount="300" :loading="false" />
     <Trend title="Stocks" :amount="1000" :lastAmount="3800" :loading="false" />
+  </section>
+
+  <section>
+    <div class="flex justify-end mb-6">
+      <TransactionModal />
+    </div>
   </section>
 
   <section class="mb-10">
@@ -26,10 +32,6 @@
 <script setup>
 const timePeriods = ['Yearly', 'Monthly', 'Weekly', 'Daily']
 const selectedView = ref(timePeriods[0])
-
-watch(selectedView, (newValue) => {
-  console.log('Selected view changed:', newValue)
-})
 
 const transactions = ref([])
 
