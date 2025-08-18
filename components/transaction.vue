@@ -2,7 +2,7 @@
   <div class="grid grid-cols-2 py-4 border-b">
     <div class="flex items-center justify-between">
       <div class="flex items-center space-x-2">
-        <UIcon :name="icon" :class="[iconColor]" />
+        <UIcon :name="icon" :class="[iconColor]" class="w-5 h-5 flex-shrink-0" />
         <div>{{ transaction.description }}</div>
       </div>
 
@@ -27,7 +27,7 @@ const props = defineProps({
   transaction: Object
 })
 
-const emit = defineEmits(['update'])
+const emit = defineEmits(['updatePage'])
 
 const isIncome = computed(() => {
   return props.transaction.type.toLowerCase() === 'income'
@@ -49,7 +49,7 @@ async function handleDelete() {
   try {
     await deleteTransaction(props.transaction)
   } finally {
-    emit('update')
+    emit('updatePage')
     toast.add({
       title: 'Transaction deleted',
     })

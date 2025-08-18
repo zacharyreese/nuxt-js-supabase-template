@@ -17,14 +17,14 @@
 
   <section>
     <div class="flex justify-end mb-6">
-      <TransactionModal />
+      <TransactionModal @updatePage="refreshTransactions" />
     </div>
   </section>
 
   <section class="mb-10">
     <div v-for="(transactionsOnDay, date) in transactionsGroupedByDate" :key="date" class="mb-10">
       <DailyTransactionSummary :date="date" :transaction="transactionsOnDay" />
-      <Transaction v-for="transaction in transactionsOnDay" :key="transaction.id" :transaction="transaction" @update="handleUpdate" />
+      <Transaction v-for="transaction in transactionsOnDay" :key="transaction.id" :transaction="transaction" @updatePage="refreshTransactions" />
     </div>
   </section>
 </template>
@@ -35,7 +35,7 @@ const selectedView = ref(timePeriods[0])
 
 const transactions = ref([])
 
-async function handleUpdate() {
+async function refreshTransactions() {
   const data = await getAllTransactions()
   transactions.value = data
 }
@@ -53,7 +53,7 @@ const transactionsGroupedByDate = computed(() => {
 })
 
 // Initial load
-await handleUpdate()
+await refreshTransactions()
 </script>
 
 <style scoped>

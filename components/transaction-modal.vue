@@ -1,8 +1,8 @@
 <template>
-  <UModal title="Add Transaction">
+  <UModal title="Add Transaction" v-model:open="open">
     <UButton icon="i-heroicons-plus-circle" class="cursor-pointer">Add</UButton>
     <template #body>
-      <UForm :state="form" @submit="handleSubmit" class="space-y-4">
+      <UForm :state="form" :schema="schema" :validate-on="['blur']" @submit="handleSubmit" class="space-y-4">
 
         <UFormField label="Transaction Type" name="transaction_type" required >
           <USelect v-model="form.transaction_type" :items="TRANSACTION_TYPES" placeholder="Select Transaction Type" class="w-full" />
@@ -24,7 +24,7 @@
           <USelect v-model="form.category" :items="CATEGORIES" placeholder="Select Category" class="w-full" />
         </UFormField>
 
-        <UButton type="submit">
+        <UButton type="submit" :loading="isLoading">
           Submit
         </UButton>
 
@@ -35,9 +35,19 @@
 
 <script setup>
 import { CATEGORIES, TRANSACTION_TYPES } from '~/constants'
+import { z } from 'zod'
+
+const emit = defineEmits(['updatePage'])
+
+const toast = useToast()
+const isLoading = ref(false)
+const supabase = useSupabaseClient()
+// Modal open state
+const open = ref(false)
 
 const handleSubmit = (e) => {
-  console.log(e)
+  saveTransaction()
+  console.log(form.value)
 }
 
 const form = reactive({
@@ -48,4 +58,53 @@ const form = reactive({
   transaction_type: '',
 })
 
+const schema = z.object({
+  amount: z.number().positive('Amount must be more than 0'),
+  transaction_date: z.string().date(),
+  description: z.string().optional(),
+  category: z.string().optional(),
+  transaction_type: z.string(),
+})
+
+const saveTransaction = async () => {
+  isLoading.value = true
+  try {
+    const { data, error } = await supabase.from('transactions')
+      .upsert({
+        amount: form.amount,
+        transaction_date: form.transaction_date,
+        description: form.description,
+        category: form.category,
+        type: form.transaction_type,
+      })
+
+    // console.log("Form values on save:", form)
+    // console.log("Form values (spread):", {...form})
+    // console.log("Form values (JSON):", JSON.stringify(form, null, 2))
+
+    // // Since the database call is commented out, set error to null for now
+    // const error = null
+    
+    if (!error) {
+      toast.add({
+        title: 'Success',
+        description: 'Transaction added successfully',
+        icon: 'i-heroicons-check-circle',
+        color: 'success',
+      })
+      // Close modal
+      open.value = false
+      emit('updatePage')
+    }
+  } catch(error) {
+    toast.add({
+      title: 'Error',
+      description: 'Failed to add transaction',
+      icon: 'i-heroicons-x-circle',
+      color: 'error',
+    })
+  } finally {
+    isLoading.value = false
+  }
+}
 </script>
