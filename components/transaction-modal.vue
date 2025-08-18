@@ -38,7 +38,6 @@ import { CATEGORIES, TRANSACTION_TYPES } from '~/constants'
 import { z } from 'zod'
 
 const emit = defineEmits(['updatePage'])
-
 const isLoading = ref(false)
 const supabase = useSupabaseClient()
 // Modal open state
@@ -48,16 +47,20 @@ const handleSubmit = (e) => {
   saveTransaction()
 }
 
-const form = reactive({
+const initialState = {
   amount: 0,
   transaction_date: '',
   description: '',
   category: '',
   transaction_type: '',
-})
+}
+// Use spread operator to create a new object with the initial state
+// to avoid resetting the form with the user input values
+const form = reactive({...initialState})
 
+// Zod schema for form validation
 const schema = z.object({
-  //amount: z.number().positive('Amount must be more than 0'),
+  amount: z.number().positive('Amount must be more than 0'),
   transaction_date: z.string().date(),
   description: z.string().optional(),
   category: z.string().optional(),
@@ -80,6 +83,7 @@ const saveTransaction = async () => {
       addTransactionErrorToast()
     } else {
       addTransactionSuccessToast()
+      resetForm()
       // Close modal
       open.value = false
       // Refresh transactions
@@ -87,8 +91,13 @@ const saveTransaction = async () => {
     }
   } catch(error) {
     addTransactionErrorToast()
+    console.log(error)
   } finally {
     isLoading.value = false
   }
+}
+
+function resetForm() {
+  Object.assign(form, initialState)
 }
 </script>

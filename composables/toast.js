@@ -17,3 +17,13 @@ export const addTransactionErrorToast = () => {
     color: 'error',
   })
 }
+
+export const deleteTransactionSuccessToast = () => {
+  const toast = useToast()
+  return toast.add({
+    title: 'Success',
+    description: 'Transaction deleted successfully',
+    icon: 'i-heroicons-check-circle',
+    color: 'success',
+  })
+}

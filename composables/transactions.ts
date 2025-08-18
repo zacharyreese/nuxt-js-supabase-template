@@ -1,5 +1,14 @@
 export const getAllTransactions = async () => {
   try {
+    const result = await $fetch('/api/transaction/getAllTransactions')
+    return result
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const getAllTransactionsSSR = async () => {
+  try {
     const {data:result} = await useFetch('/api/transaction/getAllTransactions')
     return result.value
   } catch (error) {

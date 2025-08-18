@@ -42,7 +42,6 @@ const iconColor = computed(() => {
 const currency = formatCurrency(props.transaction.amount).currency
 
 const isLoading = ref(false)
-const toast = useToast()
 
 async function handleDelete() {
   isLoading.value = true
@@ -50,9 +49,7 @@ async function handleDelete() {
     await deleteTransaction(props.transaction)
   } finally {
     emit('updatePage')
-    toast.add({
-      title: 'Transaction deleted',
-    })
+    deleteTransactionSuccessToast()
     isLoading.value = false
   }
 }

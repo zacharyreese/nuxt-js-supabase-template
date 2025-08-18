@@ -33,11 +33,13 @@
 const timePeriods = ['Yearly', 'Monthly', 'Weekly', 'Daily']
 const selectedView = ref(timePeriods[0])
 
-const transactions = ref([])
+// Initial load using useFetch for SSR
+const initialData = await getAllTransactionsSSR()
+const transactions = ref(initialData || [])
 
 async function refreshTransactions() {
   const data = await getAllTransactions()
-  transactions.value = data
+  transactions.value = data || []
 }
 
 const transactionsGroupedByDate = computed(() => {
@@ -51,9 +53,6 @@ const transactionsGroupedByDate = computed(() => {
   }
   return grouped
 })
-
-// Initial load
-await refreshTransactions()
 </script>
 
 <style scoped>
