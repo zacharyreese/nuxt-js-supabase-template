@@ -12,7 +12,7 @@ export const addTransactionErrorToast = () => {
   const toast = useToast()
   return toast.add({
     title: 'Error',
-    description: 'Transaction added successfully',
+    description: 'Failed to add transaction',
     icon: 'i-heroicons-x-circle',
     color: 'error',
   })

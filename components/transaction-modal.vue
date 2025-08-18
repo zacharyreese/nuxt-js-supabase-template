@@ -78,7 +78,6 @@ const saveTransaction = async () => {
     
     if (error) {
       addTransactionErrorToast()
-      console.log('Supabase error:', error)
     } else {
       addTransactionSuccessToast()
       // Close modal
@@ -88,7 +87,6 @@ const saveTransaction = async () => {
     }
   } catch(error) {
     addTransactionErrorToast()
-    console.log(error)
   } finally {
     isLoading.value = false
   }
