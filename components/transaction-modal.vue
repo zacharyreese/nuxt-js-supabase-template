@@ -39,7 +39,6 @@ import { z } from 'zod'
 
 const emit = defineEmits(['updatePage'])
 
-const toast = useToast()
 const isLoading = ref(false)
 const supabase = useSupabaseClient()
 // Modal open state
@@ -47,7 +46,6 @@ const open = ref(false)
 
 const handleSubmit = (e) => {
   saveTransaction()
-  console.log(form.value)
 }
 
 const form = reactive({
@@ -59,7 +57,7 @@ const form = reactive({
 })
 
 const schema = z.object({
-  amount: z.number().positive('Amount must be more than 0'),
+  //amount: z.number().positive('Amount must be more than 0'),
   transaction_date: z.string().date(),
   description: z.string().optional(),
   category: z.string().optional(),
@@ -77,32 +75,20 @@ const saveTransaction = async () => {
         category: form.category,
         type: form.transaction_type,
       })
-
-    // console.log("Form values on save:", form)
-    // console.log("Form values (spread):", {...form})
-    // console.log("Form values (JSON):", JSON.stringify(form, null, 2))
-
-    // // Since the database call is commented out, set error to null for now
-    // const error = null
     
-    if (!error) {
-      toast.add({
-        title: 'Success',
-        description: 'Transaction added successfully',
-        icon: 'i-heroicons-check-circle',
-        color: 'success',
-      })
+    if (error) {
+      addTransactionErrorToast()
+      console.log('Supabase error:', error)
+    } else {
+      addTransactionSuccessToast()
       // Close modal
       open.value = false
+      // Refresh transactions
       emit('updatePage')
     }
   } catch(error) {
-    toast.add({
-      title: 'Error',
-      description: 'Failed to add transaction',
-      icon: 'i-heroicons-x-circle',
-      color: 'error',
-    })
+    addTransactionErrorToast()
+    console.log(error)
   } finally {
     isLoading.value = false
   }
