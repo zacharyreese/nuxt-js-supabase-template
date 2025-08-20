@@ -1,10 +1,10 @@
 <template>
-  <section class="flex items-center justify-between mb-10">
+  <section class="flex items-center justify-between mb-10 vertical-center">
     <h1 class="text-4xl font-extrabold">
       Summary
     </h1>
     <div>
-      <USelectMenu v-model="selectedView" :items="timePeriods" :search-input="false" highlight class="cursor-pointer"/>
+      <USelectMenu v-model="selectedView" :items="timePeriods" :search-input="false" highlight class="cursor-pointer w-25"/>
     </div>
   </section>
 
@@ -30,8 +30,13 @@
 </template>
 
 <script setup>
-const timePeriods = ['Yearly', 'Monthly', 'Weekly', 'Daily']
+import { TIME_PERIODS } from '~/constants'
+
+const timePeriods = TIME_PERIODS
 const selectedView = ref(timePeriods[0])
+
+// Make dates reactive to selectedView changes
+const dates = useSelectedTimePeriod(selectedView)
 
 // Initial load using useFetch for SSR
 const initialData = await getAllTransactionsSSR()
